@@ -1,1 +1,2 @@
-excercise-07-07
+# S2_Exercise_07_07
+JavaScript: Exploring Object Based Programming
