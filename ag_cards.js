@@ -48,8 +48,19 @@ function pokerCard(cardSuit, cardRank){
     this.rank = cardRank;
     this.rankValue = null;
 }
+/* method to reference the image source file for a card */
+pokerCard.prototype.cardImage = function(){
+    var suitAbbr = this.suit.substring(0,1).toLowerCase();
+    return suitAbbr + this.rankValue + ".png";
+};
+/*Method to replace a card with one from the deck*/
+pokerCard.prototype.replaceFromdeck = function(pokerDeck){
+this.suit = pokerDeck.cards[0].suit;
+this.rank = pokerDeck.cards[0].rank;
+this.rankValue = pokerDeck.cards[0].rankValue;
+pokerDeck.cards.shift();
+}
 // Constructor function for poker decks
-// /\/\/\/\/\/\/\/\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
 function pokerDeck() {
     this.cards = new Array(52);
     var suits = ["Clubs", "Diamonds", "Hearts", "Spades"];
@@ -66,6 +77,17 @@ function pokerDeck() {
           this.shuffle = function() {
               this.cards.sort(function(){
                   return 0.5 - Math.random();
-              });
-          };
+    });
+  };
+  // Method to deal cards from the deck into a poker hand
+  this.dealTo = function (pokerHand){
+      for (var i = 0; i < pokerHand.cards.length; i++) {
+          pokerHand.cards[i] = this.cards.shift();
+      }
+  };
+}
+
+/* Constructor function for poker hands */
+function pokerHand(handLength){
+    this.cards = new Array(handLength);
 }
